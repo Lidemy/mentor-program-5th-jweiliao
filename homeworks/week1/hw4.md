@@ -19,7 +19,7 @@ Git 有兩個重要的用途，一個是版本控制，另一個是團隊的多�
 1. 輸入 <code>git init</code>，對這個資料夾做版本控制
 2. 輸入 <code>git status</code>，當你有檔案改動時CMD，會提示你哪些檔案做了改動，staged: 加入版控，untracked: 未加入版控
 3. 輸入 <code>git diff</code> 查看修改哪些內容
-4. 輸入 <code>git add [檔案名稱]</code>一次加入多個檔案 <code>git .</code>
+4. 輸入 <code>git add [檔案名稱]</code>一次加入多個檔案 <code>git add .</code>
 5. 輸入 <code>git commit -m "你的訊息"</code>
 6. 輸入 <code>git log</code>，查看歷史訊息</p>
 
