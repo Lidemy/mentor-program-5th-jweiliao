@@ -1,8 +1,10 @@
 function join(arr, concatStr) {
-  if (arr.length > 1) {
-    return arr.join(concatStr);
+  var str = "";
+  for(var i=0;i<arr.length;i++) {
+    str += arr[i];
+    if(i === 0 || i < arr.length - 1) str += concatStr;
   }
-  return Array.prototype.join.call(arguments, "");
+  return str
 }
 
 function repeat(str, times) {
