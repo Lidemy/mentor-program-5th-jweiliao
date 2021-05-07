@@ -23,7 +23,7 @@ xhr.onreadystatechange = function () {
 axios.get('https://lidemy-book-store.herokuapp.com/books?_limit=10')
   .then((response) => {
     // handle success
-    const result = JSON.parse(xhr.responseText)
+    const result = response.data
     let i = 0
     while (result[i]) {
       console.log(`${result[i].id} ${result[i].name}`)
