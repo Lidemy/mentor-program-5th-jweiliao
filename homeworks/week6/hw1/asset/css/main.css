@@ -161,6 +161,7 @@ svg {
   letter-spacing: 0.02em;
   text-decoration: none;
   padding: 50px 65px;
+  transition: all ease .3s;
 }
 .btn-order:nth-of-type(1) {
   margin-right: 12.5px;
@@ -170,7 +171,8 @@ svg {
 }
 .btn-order a:hover, .btn-order a:active {
   background-color: var(--btn-order);
-  transition: all .3s;
+  transform: scale(1.1);
+  transition: all ease-out .3s;
 }
 /* card-list */
 .card-list {
@@ -228,7 +230,11 @@ footer {
   text-align: center;
   padding: 15px 10px;
 }
-
+@media only screen and (max-width: 1280px) {
+  .just-banner {
+    height: 80vh;
+  }
+}  
 @media only screen and (max-width: 1024px) {
   .header {
     margin: 0 30px 0 30px;
@@ -270,6 +276,7 @@ footer {
   .pic-row {
     display: flex;
     flex-wrap: wrap;
+    align-content: center;
   }
   .pic-row .banner {
     width: 50%;
@@ -289,11 +296,11 @@ footer {
   }
   @media only screen and (max-width: 767px) {
     .just-banner {
-      height: 82vh;
+      height: 72vh;
     }
     .btn-order:nth-of-type(1) {
       margin-right: 6.5px;
-    }
+    }s
     .btn-order:nth-of-type(2) {
       margin-left: 6.5px;
     }
@@ -313,7 +320,7 @@ footer {
   }
   @media only screen and (max-width: 480px) {
     .just-banner {
-      height: 60vh;
+      height: 50vh;
     }
     .header {
       margin: 0;
