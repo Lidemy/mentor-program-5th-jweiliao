@@ -1,0 +1,225 @@
+*:before, *:after {
+  box-sizing: border-box;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  background-color: #f0f0f0;
+  font-family: "MicrosoftJhengHei","Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+@keyframes opa {
+	to { opacity: 1; }
+}
+.wrapper {
+  background-color: #ffffff;
+  box-shadow: 1.8px 2.4px 5px 0 rgba(0, 0, 0, 0.3);
+  max-width: 640px;
+  margin: 120px auto 60px auto;
+}
+.wrapper:before {
+  content: '';
+  display: block;
+  border-top: solid 8px #fad312;
+}
+.content {
+  padding: 50px 35px 40px 40px;
+}
+.content h1 {
+  margin: 0 0 35px 0;
+}
+.content h4 {
+  font-size: 0.875em;
+  margin: 0 0 10px 0;
+}
+.input-title {
+  font-size: 1.25em;
+}
+p.reqired-text {
+  margin: 20px 0 50px 0;
+}
+.reqired-text {
+  color: #e74149;
+  font-size: 1em;
+}
+input, button {
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: .1px;
+}
+input[type="checkbox"], input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 4px 0 0;
+  line-height: normal;
+}
+.input-control {
+  display: block;
+  width: 100%;
+  height: 37px;
+  padding: 6px 16px;
+  font-size: 13px;
+  line-height: 1.846;
+  color: #666666;
+  background-color: transparent;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+.input-control:focus {
+  border-color: #66afe9;
+  outline: 0;
+  box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%), 0 0 8px rgb(102 175 233 / 60%);
+  transition: .4s;
+}
+input.input-control, 
+input[type=text], 
+input[type=password], 
+input[type=email], 
+input[type=number], 
+[type=text].input-control, 
+[type=password].input-control, 
+[type=email].input-control, 
+[type=tel].input-control {
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  -webkit-appearance: none;
+  box-shadow: inset 0 -1px 0 #dddddd;
+  font-size: 16px;
+}
+input.input-control:focus, 
+input[type=text]:focus, 
+input[type=password]:focus, 
+input[type=email]:focus, 
+input[type=number]:focus, 
+[type=text].input-control:focus, 
+[type=password].input-control:focus, 
+[type=email].input-control:focus, 
+[type=tel].input-control:focus {
+  box-shadow: inset 0 -2px 0 rgb(103, 58, 183);
+}
+/* input[type="radio"] {
+  margin-left: -25px;
+} */
+input[type="radio"] {
+  position: relative;
+  margin-top: 6px;
+  margin-right: 4px;
+  vertical-align: top;
+  border: none;
+  background-color: transparent;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+input[type="radio"]:before, 
+input[type="radio"]:after {
+  content: "";
+  display: block;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  transition: 240ms;
+}
+input[type="radio"]:after {
+  position: relative;
+  top: -3px;
+  border: 2px solid #666666;
+}
+input[type="radio"]:checked:after {
+  border-color: rgb(103, 58, 183);
+}
+input[type="radio"]:before {
+  position: absolute;
+  left: 0;
+  top: -3px;
+  background-color: rgb(103, 58, 183);
+  -webkit-transform: scale(0);
+  transform: scale(0);
+}
+input[type="radio"]:checked:before {
+  -webkit-transform: scale(0.5);
+  transform: scale(0.5);
+}
+.input-mr {
+  position: relative;
+  margin: 20px 0 50px 0;
+}
+.radio-block {
+  display: block;
+  margin-bottom: 20px;
+}
+.radio-block input[type="radio"], 
+.radio-block span {
+  cursor: pointer;
+  vertical-align: middle;
+}
+textarea {
+  appearance: none;
+  border: 2px solid rgba(127, 127, 127, 0.2);
+  background-color: rgba(127, 127, 127, 0.2);
+  resize: none;
+  outline: none;
+  width: 100%;
+}
+textarea:hover {
+  border: 2px solid rgba(127, 127, 127, 0.5);
+}
+textarea:focus {
+  background-color: #ffffff;
+  border: 2px solid rgb(103, 58, 183);
+  transition: all .4s;
+}
+.btn-yellow {
+  width: 92px;
+  height: 40px;
+  padding: 13px 31px 13px 32px;
+  border-radius: 3px;
+  background-color: #fad312;
+  background-image: none;
+  border: none;
+  box-shadow: 1px 1px 4px rgb(0 0 0 / 40%);
+  cursor: pointer;
+  font-weight: normal;
+  text-align: center;
+  touch-action: manipulation;
+  vertical-align: middle;
+  text-transform: uppercase;
+  transition: all 0.25s;
+  margin-bottom: 0;
+  outline: none;
+  white-space: nowrap;
+}
+.btn-yellow:active {
+  background-color: rgb(148, 111, 211);
+  background-image: radial-gradient(circle, rgb(148, 111, 211) 10%, rgb(120, 80, 190) 11%);
+  background-repeat: no-repeat;
+  background-size: 1000% 1000%;
+  box-shadow: 2px 2px 4px rgb(0 0 0 / 40%);
+}
+.footer {
+  border-top: solid 3px #fad312;
+  background-color: #000000;
+  text-align: center;
+}
+.copyright {
+  color: #999999;
+  font-size: 0.8125em;
+  padding: 26px 10px;
+}
+.input-mr.reqired:after {
+  content: '此欄位必填';
+  color: #ff0000;
+  display: block;
+  position: absolute;
+  margin-top: 2px;
+  opacity: 0;
+  animation: opa .5s ease-in 0s forwards;
+}
+@media only screen and (max-width: 767px) {
+  .wrapper {
+    margin-top: 0;
+  }
+}
