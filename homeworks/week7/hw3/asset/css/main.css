@@ -1,0 +1,138 @@
+:root {
+  --pink: #ff6666;
+  --white: #ffffff;
+  --bg: #f7f1f1;
+}
+* {
+  box-sizing: border-box;
+}
+html, body {
+  background: var(--bg);
+  font-size: 1em;
+  font-family:'Quicksand', sans-serif;
+  height:100%;
+}
+@keyframes strikeitem {
+	to { width:calc(100% + 1rem); }
+}
+.todolist {
+  box-shadow: -20px -20px 0px 0px rgb(100 100 100 / 10%);
+  background-color: var(--pink);
+  color: var(--white);
+  padding: 2rem 3rem 3rem;
+  max-width: 500px;
+  margin: 4em auto;
+}
+.todolist button[class^="btn"] {
+  border: none;
+  background: none;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  color: var(--white);
+  padding: 0;
+  outline: none;
+}
+.todolist .list {
+  padding: 0;
+  list-style: none;
+  margin-top:2.6rem;
+}
+.list li {
+  display: flex;
+  margin: 0 -3rem 4px;
+  padding: 1.1rem 3rem;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255,255,255,0.1);
+  opacity: 1;
+  transition: all .3s linear;
+}
+.list li:hover {
+  background: rgba(255,255,255,0.25);
+}
+.list .actions {
+  flex-shrink: 0;
+  padding-left: 0.7em;
+
+}
+.list span {
+  position: relative;
+  transition: opacity .2s linear;
+}
+.list .done span {
+  opacity: .6;
+}
+.list .done span:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -.5rem;
+  display: block;
+  width: 0%;
+  height: 1px;
+  background: var(--white);
+  animation: strikeitem .3s ease-out 0s forwards;
+}
+.todolist h1 {
+  border-bottom: 1px solid rgba(255,255,255,.3);
+  font-weight: normal;
+  font-size: 2.6rem;
+  letter-spacing: 0.05em;
+}
+.todolist h1 span {
+  display: block;
+  font-size: 0.8rem;
+  margin-bottom: 0.7rem;
+  margin-left: 3px;
+  margin-top: 0.2rem;
+}
+.todolist button.btn-add {
+  border: none;
+  background: #FF6666;
+  border: 1px solid rgba(255,255,255,.3);
+  color: var(--white);
+  cursor: pointer;
+  height: 3rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 0 1.3rem;
+  margin-left: 5px;
+  outline: none;
+  transition: background .2s ease-out;
+}
+.flex-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 3rem;
+}
+.flex-row p {
+  font-size: 1.3rem;
+  min-width: 100%;
+  margin-bottom: .5rem;
+}
+.todolist button.btn-add:hover {
+  background: #FF5E5E;
+}
+.add-item {
+  border: none;
+  background: var(--bg);
+  padding: 0 1.5em;
+  flex-grow: 1;
+  height: 3rem;
+  font-size: initial;
+  outline: none;
+}
+.empty-list {
+  margin-top: 2.6rem;
+  letter-spacing: .05em;
+  /* font-style: italic; */
+  opacity: 0.8;
+}
+.complete, .needTodo {
+  position: absolute;
+  right: 0
+}
+.needTodo {
+  right: 5rem;
+}
