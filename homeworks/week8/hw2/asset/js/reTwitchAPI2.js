@@ -2,63 +2,60 @@
 const clientID = 'q425xpddh26xjujtdplt1fl1ugjpn5'
 const Accept = 'application/vnd.twitchtv.v5+json'
 const offset = 0
+const limit = 20
 
 function getTopGameAPI() {
-  const url = 'https://api.twitch.tv/kraken/games/top'
-  const config = {
-    headers: {
-      'Client-ID': clientID,
-      Accept
-    }
-  }
+  const xhr = new XMLHttpRequest()
+  const params = '?limit=5'
   // eslint-disable-next-line
-  axios.get(url, config)
-    .then((response) => {
-      const topGames = response.data.top
+  xhr.open('GET', 'https://api.twitch.tv/kraken/games/top' + params, true)
+  xhr.setRequestHeader('Client-ID', clientID)
+  xhr.setRequestHeader('Accept', Accept)
+  xhr.send(null)
+
+  xhr.onreadystatechange = () => {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      const result = JSON.parse(xhr.responseText)
+      const topGames = result.top
       const gameList = []
       for (const topGame of topGames) {
         gameList.push(topGame.game.name)
       }
       generateNav(gameList)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-    .then(() => {})
-}
-function getStreamsAPI(topGame, offset) {
-  const game = (!topGame) ? '' : topGame
-
-  const limit = 20
-  const channels = []
-
-  const url = 'https://api.twitch.tv/kraken/streams/'
-  const config = {
-    headers: {
-      'Client-ID': clientID,
-      Accept
-    },
-    params: {
-      game,
-      offset,
-      limit
     }
   }
-  // get Twitch top 20 games
-  // eslint-disable-next-line
-  axios.get(url, config)
-    .then((response) => {
-      const { streams } = response.data
-      // const { result } = response
+  xhr.onload = function(data) {
+    // console.log(xhr.responseText)
+  }
+}
+function getStreamsAPI(topGame, offset, limit) {
+  const game = (!topGame) ? '' : topGame
+  const channels = []
+  const url = 'https://api.twitch.tv/kraken/streams/'
 
-      // console.log(response.data)
-      // console.log(streams.length, offset, limit, game)
-      if (!streams.length) return console.log('查詢不到任何資料')
-      // 假如取得的資料少於 limit 就在抓一次
+  const xhr = new XMLHttpRequest()
+  const params = `?game=${game}&offset=${offset}&limit=${limit}`
+
+  xhr.open('GET', url + params, true)
+  xhr.setRequestHeader('Client-ID', clientID)
+  xhr.setRequestHeader('Accept', Accept)
+  xhr.send(null)
+  xhr.onreadystatechange = () => {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      const result = JSON.parse(xhr.responseText)
+      const { streams } = result
+      const loadBtn = document.getElementById('load-more')
+      console.log(streams.length)
+
+      if (streams.length === 0) {
+        loadBtn.style.display = 'none'
+        return
+      }
       if (streams.length < limit) {
-        // console.log('streams.length', streams.length)
-        // console.log('offset', offset)
-        return getStreamsAPI(game, offset + 1)
+        loadBtn.style.display = 'none'
+        return
+      } else {
+        loadBtn.style.display = 'block'
       }
 
       for (const stream of streams) {
@@ -91,7 +88,7 @@ function getStreamsAPI(topGame, offset) {
       for (const stream of channels) {
         generateHTML(stream)
       }
-
+      // eslint-disable-next-line
       function generateHTML(result) {
         const content = document.querySelector('.content')
         const templateHTML = document.createElement('DIV')
@@ -132,13 +129,13 @@ function getStreamsAPI(topGame, offset) {
         loadBtn.textContent = '載入更多'
         loadBtn.disabled = false
       }
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-    .then(() => {})
+    }
+    // xhr.onload = function(data) {
+    //   console.log(xhr.responseText)
+    // }
+  }
 }
-
+// eslint-disable-next-line
 function generateNav(gameList) {
   const topNav = document.getElementsByClassName('twitch-top-game')[0]
 
@@ -184,12 +181,12 @@ function generateChannels(e, topGame) {
 
   getSiblings(e)
 
-  getStreamsAPI(topGame, offset)
+  getStreamsAPI(topGame, offset, limit)
 }
 
 // init
 getTopGameAPI()
-getStreamsAPI(null, offset)
+getStreamsAPI(null, offset, limit)
 
 // header effect
 function headerScroll() {
@@ -264,23 +261,6 @@ headerScroll()
 //   getStreamsAPI(topGame, offset)
 // }
 
-// fade effect
-// function fadeOut(element) {
-//   var opacity = 0;
-//   function decrease () {
-//     opacity += 0.05
-//     if (opacity >= 0){
-//         // complete
-//         element.style.opacity = 1;
-//         return true
-//     }
-//     element.style.opacity = opacity
-//     requestAnimationFrame(decrease)
-//   }
-//   decrease()
-// }
-// fadeOut()
-
 const loadMore = document.getElementById('load-more')
 loadMore.addEventListener('click', () => {
   let topGame = document.querySelector('.twitch-top-game > li.active') || ''
@@ -293,36 +273,5 @@ loadMore.addEventListener('click', () => {
 
   loadBtn.textContent = '載入中...'
   loadBtn.disabled = true
-  getStreamsAPI(topGame, offset)
+  getStreamsAPI(topGame, offset, limit)
 })
-
-// function scrollTo() {
-//   let scrollHeight = Math.max(
-//     document.body.scrollHeight, document.documentElement.scrollHeight,
-//     document.body.offsetHeight, document.documentElement.offsetHeight,
-//     document.body.clientHeight, document.documentElement.clientHeight
-//   )
-//   console.log(scrollHeight)
-// }
-// const resizeObserver = new ResizeObserver(entries => {
-//   const contentHeight =  document.querySelector('.content').offsetHeight
-//   console.log('Body height changed:', entries[0].target.clientHeight)
-// })
-// window.setTimeout((contentHeight) => {
-//   window.scrollTo(0, contentHeight)
-//   resizeObserver.disconnect()
-// }, 1000)
-// resizeObserver.observe(document.body)
-
-// loading frame
-// function loading() {
-//   content = document.querySelector('.content')
-//   loader = document.createElement('DIV')
-//   loader.classList = 'loaderFrame'
-//   content.appendChild(loader)
-// }
-// function clear() {
-//   let loader =document.querySelector('.loader')
-//   loader.parentNode.removeChild(loader)
-// }
-// loading()

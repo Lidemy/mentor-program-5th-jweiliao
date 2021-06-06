@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 const url = 'https://dvwhnbka7d.execute-api.us-east-1.amazonaws.com/default/lottery'
 const config = { headers: { 'Content-Type': 'application/json' } }
 const luckyDraw = document.querySelector('.lucky-draw')
@@ -8,7 +6,7 @@ luckyDraw.addEventListener('click', (e) => {
   const _this = e.target
   e.preventDefault()
   _this.classList.add('isDisabled')
-
+  // eslint-disable-next-line
   axios.get(url, config)
     .then((response) => {
       const result = response.data.prize
