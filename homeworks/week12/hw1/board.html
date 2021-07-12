@@ -64,7 +64,7 @@
       function get_discussion($card_row) {
         $.ajax({
           method: 'GET',
-          url: 'http://localhost/discussion/get_discussion.php',
+          url: 'http://mentor-program.co/mtr04group5/wei/week12/hw1/get_discussion.php',
           data: {
             site_key: 'wei',
             cursor
@@ -98,7 +98,7 @@
         }
         $.ajax({
           method: 'POST',
-          url: 'http://localhost/discussion/add_discussion.php',
+          url: 'http://mentor-program.co/mtr04group5/wei/week12/hw1/add_discussion.php',
           data,
           cache: false
         }).done((res) => {
