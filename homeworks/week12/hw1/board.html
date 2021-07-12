@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>留言板</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="warning">
+    <strong>注意！本站為練習用網站，因教學用途刻意忽略資安的實作，註冊時請勿使用任何真實的帳號或密碼。</strong>
+  </header>
+  <main class="board">
+    <h1 class="board__title">Comments</h1>
+    <form class="board__new-comment-form" method="POST" action="add_discussion.php">
+      <div class="board__nickname">
+        <span>暱稱：</span>
+        <input type="text" name="nickname" />
+      </div>
+      <textarea name="content" rows="5"></textarea>
+      <input class="board__submit-btn" type="submit" />
+    </form>
+    <div class="board__hr"></div>
+    <section class="card__row"></section>
+    <button type="button" id="load_more">載入更多</button>
+  </main>
+</body>
+  <script>
+    function escape_str(output) {
+      return output.replace(/\&/g, '&amp;')
+      .replace(/\</g, '&lt;')
+      .replace(/\>/g, '&gt;')
+      .replace(/\"/g, '&quot;')
+      .replace(/\'/g, '&#x27')
+      .replace(/\//g, '&#x2F');
+    }
+    
+    function append_new_discussion(container, discussion, isPrepend) {
+      const template = `<div class="card">
+
+      <div class="card__avatar"></div>
+        <div class="card__body">
+          <div class="card__info">
+            <span class="card__author">${escape_str(discussion.nickname)}</span>
+            <span class="card__time">${escape_str(discussion.created_at)}</span>
+          </div>
+          <p class="card__content">${escape_str(discussion.content)}</p>
+        </div>
+      </div>`
+
+      if(isPrepend) {
+        container.prepend(template);
+      } else {
+        container.append(template);
+      }
+    }
+    $(function() {
+      const $card_row = $('.card__row');
+      let cursor = null;
+      get_discussion($card_row)
+
+      function get_discussion($card_row) {
+        $.ajax({
+          method: 'GET',
+          url: 'http://localhost/discussion/get_discussion.php',
+          data: {
+            site_key: 'wei',
+            cursor
+          },
+          cache: false
+        }).done(function(data) {
+          if(data.message === "success") {
+            let discussions = data.discussion;
+            if (discussions.length < 6) {
+              for (let i = 0; i < discussions.length; i += 1) {
+                append_new_discussion($card_row, discussions[i], false);
+              }
+              $('#load_more').hide();
+            } else {
+              for (let i = 0; i < discussions.length - 1; i += 1) {
+                append_new_discussion($card_row, discussions[i], false);
+              }
+              cursor = discussions[discussions.length - 2].id;
+            }
+          }
+        }).fail(function() {
+          
+        });
+      }
+      $('.board__new-comment-form').submit((e) => {
+        e.preventDefault();
+        const data = {
+          site_key: 'wei',
+          nickname: $('input[name=nickname]').val().trim(),
+          content: $('textarea[name=content]').val().trim()
+        }
+        $.ajax({
+          method: 'POST',
+          url: 'http://localhost/discussion/add_discussion.php',
+          data,
+          cache: false
+        }).done((res) => {
+          console.log(res);
+          if(res.message === "success") {
+            const [discussion] = res.discussion;
+            append_new_discussion($card_row, discussion, true);
+
+            $('input[name=nickname]').val('');
+            $('textarea[name=content]').val('');
+          }  
+        });
+        });
+        $('#load_more').on('click', (e) => {
+          get_discussion($card_row)
+        });
+      });
+  </script>
+</html>
