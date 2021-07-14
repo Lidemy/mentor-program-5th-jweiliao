@@ -35,7 +35,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>留言板</title>
   <link rel="stylesheet" href="style.css">
-  <script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
+  <script src="//cdn.ckeditor.com/4.16.1/full/ckeditor.js"></script>
 </head>
 
 <body>
@@ -55,7 +55,7 @@
           }  
         ?>
         <form class="board__new-comment-form" method="POST" action="handle_update_comment.php">
-          <textarea name="content" rows="5" id="xCKEditor_4"><?php echo $row['content'] ?></textarea>
+          <textarea name="content" rows="5" id="CKEditor_4"><?php echo escape($row['content']) ?></textarea>
 
           <?php if($username) { ?>
             <?php if(!$user['enable_edit']) { ?>

@@ -50,7 +50,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>留言板</title>
   <link rel="stylesheet" href="style.css">
-  <script type="text/javascript" src="./ckeditor/ckeditor.js"></script>
+  <script src="//cdn.ckeditor.com/4.16.1/full/ckeditor.js"></script>
 </head>
 
 <body>
