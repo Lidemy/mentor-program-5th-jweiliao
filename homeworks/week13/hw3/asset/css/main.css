@@ -1,0 +1,390 @@
+* {
+  box-sizing: border-box;
+} 
+body {
+  font-family: 'Microsoft JhengHei', sans-serif;
+}
+img {
+  vertical-align: top;
+  max-width: 100%;
+}
+.header {
+  align-items: center;
+  background-color: rgba(255, 255, 255, .9);
+  height: 5.625rem;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 15px;
+  transition: transform 0.3s;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 0;
+}
+.game-title {
+  display: none;
+}
+.scroll-up .header {
+  transform: none;
+  z-index: 10;
+}
+.scroll-down .header {
+  transform: translate3d(0, -100%, 0);
+}
+.twitch-logo {
+  position: relative;
+  width: 120px;
+  height: 90px;
+  transform: translate3d(0, -15px, 0);
+}
+.twitch-icon-m {
+  display: none;
+  width: 45px;
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  transform: translate(-50%, -50%);
+}
+.twitch-logo .twitch-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transform: scale(1);
+  transition: transform .3s;
+}
+.twitch-logo:hover .twitch-icon {
+  transform: scale(1.1);
+  transition: transform .3s;
+}
+.twitch-top-game {
+  align-items: center;
+  display: flex;
+  list-style: none;
+}
+.twitch-top-game li {
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 1rem;
+  margin: 2px;
+}
+.twitch-top-game li:hover {
+  background-color: #a970ff;
+  box-shadow: 0 7px 15px rgb(0 0 0 / 20%);
+  color: #ffffff;
+  transform: translate3d(0, -4px, 0);
+  transition: all .3s ease 0s;
+}
+.twitch-top-game li.active {
+  background-color: rgb(157,92,255);
+  box-shadow: 0 7px 15px rgb(0 0 0 / 20%);
+  color: #ffffff;
+  transform: translate3d(0, -4px, 0);
+}
+.content {
+  display: flex;
+  /* height: 100vh; */
+  justify-content: flex-start;
+  margin: 90px 10px 0;
+}
+.card-views {
+  display: flex;
+  flex-flow: column;
+  position: relative;
+  margin-bottom: 1.25rem;
+  transition: transform .1s;
+}
+.card-views:hover {
+  box-shadow: 0 7px 15px rgb(0 0 0 / 20%);
+  transform: scale(1.05);
+  background-color: rgba(71,166,255,.05);
+}
+.card-row {
+  /* align-items: center; */
+  display: flex;
+  flex-wrap: nowrap;
+  margin-top: 0.625rem;
+}
+.card-info h3:hover,
+.card-info h5:hover,
+.card-info p:hover {
+  color: #a970ff;
+}
+.card-info h3, 
+.card-info h5,
+.card-info p,
+.card-info .tag {
+  color: #888888;
+  font-weight: normal;
+  letter-spacing: normal;
+  margin: 0 0 0.3rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.card-views h3 {
+  color: #333333;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+.card-views a {
+  display: block;
+  text-decoration: none;
+  margin: 0 5px;
+}
+.card-views .card-info {
+  order: 2;
+  overflow: hidden;
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+.card-views .card-info .tag {
+  display: inline-flex;
+  background-color: #aaaaaa;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 0.875rem;
+  padding: 0.05rem 0.3rem;
+}
+.card-views .card-logo {
+  position: relative;
+  flex: 0 0 3rem;
+  order: 1;
+}
+.card-views .card-logo img {
+  border-radius: 100%;
+  width: 40px;
+}
+.stream-type {
+  border-radius: 4px;
+  background-color: #ff0000;
+  color: #ffffff;
+  padding: 2px 4px;
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  letter-spacing: normal;
+  /* opacity: 0; */
+  /* visibility: hidden; */
+  transition: opacity .1s;
+}
+/* .card-views:hover .stream-type {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity .3s;
+} */
+.menu {
+  position: relative;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  transition: all .5s ease-in-out;
+  /* border: 3px solid #000000; */
+}
+.menu-btn{
+  width: 30px;
+  height: 3px;
+  background: #000000;
+  border-radius: 5px;
+  transition: all .5s ease-in-out;
+}
+.menu-btn:before,
+.menu-btn:after {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 3px;
+  background: #000000;
+  border-radius: 5px;
+  transition: all .5s ease-in-out;
+}
+.menu-btn:before {
+  transform: translateY(-10px);
+}
+.menu-btn:after {  
+  transform: translateY(10px);
+}
+.menu.open .menu-btn{
+  transform: translateX(-50px);
+  background: transparent;
+}
+.menu.open .menu-btn:before {
+  transform: rotate(45deg) translate(35px, -35px);
+}
+.menu.open .menu-btn:after {
+  transform: rotate(-45deg) translate(35px, 35px);
+}
+.btn-row {
+  display: flex;
+  justify-content: center;
+}
+.btn-row button {
+  border: rgb(157,92,255) 3px solid;
+  background-color: #ffffff;
+  color: rgb(157,92,255);
+  cursor: pointer;
+  padding: 10px 35px;
+  transition: all .25s;
+}
+.btn-row button:hover {
+  background-color: rgb(157,92,255);
+  color: #ffffff;
+  transition: all .4s;
+}
+.loaderFrame,
+.loaderFrame:before,
+.loaderFrame:after {
+  border-radius: 50%;
+}
+.loaderFrame {
+  color: #a970ff;
+  font-size: 11px;
+  text-indent: -99999em;
+  margin: 55px auto;
+  position: relative;
+  width: 10em;
+  height: 10em;
+  box-shadow: inset 0 0 0 1em;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+}
+.loaderFrame:before,
+.loaderFrame:after {
+  position: absolute;
+  content: '';
+}
+.loaderFrame:before {
+  width: 5.2em;
+  height: 10.2em;
+  background: #fff;
+  border-radius: 10.2em 0 0 10.2em;
+  top: -0.1em;
+  left: -0.1em;
+  -webkit-transform-origin: 5.1em 5.1em;
+  transform-origin: 5.1em 5.1em;
+  -webkit-animation: load2 2s infinite ease 1.5s;
+  animation: load2 2s infinite ease 1.5s;
+}
+.loaderFrame:after {
+  width: 5.2em;
+  height: 10.2em;
+  background: #fff;
+  border-radius: 0 10.2em 10.2em 0;
+  top: -0.1em;
+  left: 4.9em;
+  -webkit-transform-origin: 0.1em 5.1em;
+  transform-origin: 0.1em 5.1em;
+  -webkit-animation: load2 2s infinite ease;
+  animation: load2 2s infinite ease;
+}
+@-webkit-keyframes load2 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes load2 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+footer {
+  background-color: #9146FF;
+  color: #ffffff;
+  text-align: center;
+  padding: 10px 15px;
+  margin-top: 30px;
+}
+@media only screen and (max-width: 1023px) {
+  .header {
+    z-index: 10;
+  }
+  .game-title {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 300;
+  }
+  .twitch-logo {
+    max-width: 45px;
+    transform: translate3d(0, 0, 0);
+  }
+  .navgation {
+    position: absolute;
+    width: 100%;
+    min-height: 17rem;
+    left: 0;
+    top: 90px;
+    overflow: hidden;
+    z-index: -10;
+  }
+  .menu {
+    display: flex;
+    transform: translate3d(0, 0, 0);
+  }
+  .scroll-down .menu.open {
+    transform: translate3d(0, 150%, 0);
+  }
+  .twitch-top-game {
+    align-items: start;
+    box-shadow: 0 7px 15px rgb(0 0 0 / 20%);
+    background-color: rgba(255,255,255,0.95);
+    flex-direction: column;
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    left: 0;
+    transform: translate3d(0, -100%, 0);
+    transition: all .3s;
+    z-index: -10;
+  }
+  .twitch-top-game li {
+    font-weight: 700;
+    padding: 1rem 0.9375rem;
+    margin: 0;
+    width: 100%;
+    transform: translate3d(0, 0, 0);
+  }
+  .twitch-top-game li:hover {
+    transform: translate3d(0, 0, 0);
+    transition: all .3 ease 0s;
+  }
+  .twitch-top-game li.active {
+    box-shadow: 0 7px 15px rgb(0 0 0 / 30%);
+    transform: translate3d(0, 0, 0);
+    transition: all .3 ease 0s;
+  }
+  .navgation.open .twitch-top-game {
+    transform: translate3d(0, 0, 0);
+    transition: all .3s;
+    opacity: 9.5;
+    z-index: 10;
+  }
+  .twitch-icon {
+    display: none;
+  }
+  .twitch-icon-m {
+    display: block;
+  }
+}
+
+@media only screen and (max-width: 567px) {
+  .card-info h3, .card-info h5, .card-info p, .card-info .tag {
+    white-space: normal;
+  }
+}
