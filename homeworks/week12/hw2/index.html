@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo List</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="stylesheet" href="asset/css/main.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="todolist">
+    <div>
+      <h1 class="title">Todo List<span>Get things done, one item at a time.</span></h1>
+    </div>
+    <div>
+      <p class="empty-list">Your todo list is empty.</p>
+      <ul class="list">
+        <!-- <li class="done"><span>read a book</span><div class="action"><button type="button" class="btn-check"><i aria-hidden="true" class="material-icons">check_box</i></button><button class="btn-delete"><i aria-hidden="true" class="material-icons">delete</i></button></div></li>
+        <li><span>watching TV</span><div class="action"><button type="button" class="btn-check"><i aria-hidden="true" class="material-icons">check_box_outline_blank</i></button><button class="btn-delete"><i aria-hidden="true" class="material-icons">delete</i></button></div></li> -->
+      </ul>
+      <div style="position: relative;">
+        <span class="complete"></span>
+        <span class="needTodo"></span>
+      </div>
+    </div>
+    <div>
+      <button class="filter-btn btn-all">全部</button>
+      <button class="filter-btn btn-done">已完成</button>
+      <button class="filter-btn btn-undone">未完成</button>
+    </div>
+    <div class="flex-row">
+      <p>Add to the todo list</p>
+      <input type="text" value="" class="add-item"><button type="button" class="btn-add">ADD ITEM</button>
+      <button type="button" class="btn-save">SAVE</button>
+    </div>
+  </div>
+</body>
+  <script src="asset/js/main.js"></script>
+</html>
