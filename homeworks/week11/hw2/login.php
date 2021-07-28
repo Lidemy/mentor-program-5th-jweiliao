@@ -9,6 +9,7 @@
   if(!empty($_SESSION['username'])) {
     $username = $_SESSION['username'];
     // $user = getUserFromUsername($username);
+    header("Location: index.php");
   }
 ?>
 <!DOCTYPE html>
