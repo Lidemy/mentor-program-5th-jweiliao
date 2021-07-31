@@ -31,15 +31,11 @@
   WHERE C.id <> 1
   ORDER BY C.id DESC";
 
-  // $stmt = $conn->prepare($sql);
-  // $stmt->bind_param("ii", $item_per_pages, $offset);
-  // $result = $stmt->execute();
   $result = $conn->query($sql);
 
   if(!$result) {
     die("Error: " . $conn->error);
   }
-  // $result = $stmt->get_result();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,7 +47,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="style.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-  <script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
+  <script src="//cdn.ckeditor.com/4.16.1/full/ckeditor.js"></script>
 </head>
 
 <body>
@@ -120,8 +116,8 @@
         url: url,
         cache: false,
         data: {
-          user_id: user_id,
-          user_group_id: user_group_id
+          user_id,
+          user_group_id
         }
       })
       .done(function(responsive, checkUserGroup) {

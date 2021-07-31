@@ -1,5 +1,21 @@
 <?php
+  session_start();
   require_once("conn.php");
+  require_once("utils.php");
+
+  $username = NULL;
+  $user = NULL;
+  
+  if(!empty($_SESSION['username'])) {
+    $username = $_SESSION['username'];
+    $user = getUserFromUsername($username);
+  }
+
+  $user_group_id = isset($user['user_group_id']) ? (int)$user['user_group_id'] : 0;
+  if($user_group_id === 0 || $user_group_id > 3) {
+    echo "您沒有權限操作";
+    exit;
+  }
 
   if(empty($_GET['user_group_id']) || empty($_GET['user_id'])) {
     header('Location: board_admin.php?errCode=1');

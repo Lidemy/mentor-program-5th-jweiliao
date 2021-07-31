@@ -2,7 +2,11 @@
   session_start();
   require_once("conn.php");
   require_once("utils.php");
-  
+
+  if(empty($_GET['id'])) {
+    header("Location: index.php");
+  }
+
   $id = $_GET['id'];
   $username = NULL;
   $user = NULL;
@@ -58,7 +62,7 @@
           <textarea name="content" rows="5" id="CKEditor_4"><?php echo escape($row['content']) ?></textarea>
 
           <?php if($username) { ?>
-            <?php if(!$user['enable_edit']) { ?>
+            <?php if($user_group_id === 4) { ?>
               <h3>您已被停權</h3>
               <?php } else { ?>
               <input type="hidden" name="id" value="<?php echo $row['id'] ?>" />
