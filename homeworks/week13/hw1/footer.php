@@ -1,0 +1,1 @@
+<footer>Copyright © 2021 Who's Blog All Rights Reserved.</footer>
